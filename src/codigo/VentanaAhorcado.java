@@ -26,8 +26,10 @@ public class VentanaAhorcado extends javax.swing.JFrame {
     //en esta primera version del ahorcado, siempre es la misma palabra.
     
     int numeroFallos = 0;
+    int numeroAciertos = 0;
     
     public void chequeaLetra(String letra){
+        URL nombreImagen = null;
         letra = letra.toUpperCase(); //convierto la letra en mayúscula. 
         palabraOculta = palabraOculta.toUpperCase(); //palabra a mayúscula.
         
@@ -39,6 +41,12 @@ public class VentanaAhorcado extends javax.swing.JFrame {
                 }
             }
             panelGuiones.setText(palabraConGuiones);
+            numeroAciertos ++;
+            if(numeroAciertos == 5){
+                nombreImagen = getClass().getResource("/imagenes/GGWP.png");
+            }
+            ImageIcon miImagen = new ImageIcon(new ImageIcon(nombreImagen).getImage().getScaledInstance(panelAhorcado.getWidth(), panelAhorcado.getHeight(), Image.SCALE_DEFAULT));
+            panelAhorcado.setIcon(miImagen);
         }
         //si no contiene la letra, aumenta el numero de fallos y
         //también cambia a la siguiente imagen.
@@ -62,12 +70,14 @@ public class VentanaAhorcado extends javax.swing.JFrame {
            case 3 : nombreImagen = nombreImagen = getClass().getResource("/imagenes/ahorcado_3.png"); break;
            case 4 : nombreImagen = nombreImagen = getClass().getResource("/imagenes/ahorcado_4.png"); break;
            case 5 : nombreImagen = nombreImagen = getClass().getResource("/imagenes/ahorcado_5.png"); break;
-           case 6 : nombreImagen = nombreImagen = getClass().getResource("/imagenes/ahorcado_fin.png"); break;
-           default : nombreImagen = nombreImagen = getClass().getResource("/imagenes/ahorcado_fin.png"); break;
+           case 6 : nombreImagen = nombreImagen = getClass().getResource("/imagenes/gameOver.jpg"); break;
+           default : nombreImagen = nombreImagen = getClass().getResource("/imagenes/gameOver.jpg"); break;
        }
        ImageIcon miImagen = new ImageIcon(new ImageIcon(nombreImagen).getImage().getScaledInstance(panelAhorcado.getWidth(), panelAhorcado.getHeight(), Image.SCALE_DEFAULT));
        panelAhorcado.setIcon(miImagen);
+       
    }
+  
     
     public VentanaAhorcado() {
         initComponents();
